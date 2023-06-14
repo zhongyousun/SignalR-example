@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>SignalR TEST </title>
+    <script src="https://cdn.jsdelivr.net/npm/@microsoft/signalr@5.0.7/dist/browser/signalr.min.js"></script>
+    <script>
+        // 建立 SignalR Hub 連線
+        const hubConnection = new signalR.HubConnectionBuilder()
+            .withUrl("https://localhost:7013/messageHub/")
+            .build();
+
+        hubConnection.start()
+            .then(() => {
+                console.log("Connection started");
+            });
+        
+
+
+        // 使用者點擊Login按鈕時的處理函式
+        function onLoginClick() {
+            // 取得使用者輸入的使用者ID
+            const userId = document.getElementById("userIdInput").value;
+
+            // 將使用者ID包成 JSON 格式
+            const jsonData = {
+                "userId": userId
+            };
+            
+            // 使用 SignalR Hub 的 LoadUserInfo 方法，將 JSON 資料傳送至後端
+            hubConnection.invoke("LoadUserInfo", jsonData)
+                .then(() => {
+                    console.log("Data sent successfully!");
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        }
+
+
+        // 使用者點擊Send按鈕時的處理函式
+        function onSendClick() {
+            // 取得使用者輸入的使用者ID
+            const userId = document.getElementById("msgUserIdInput").value;
+            // 取得使用者輸入的訊息
+            const msg = document.getElementById("msgInput").value;
+
+            // 使用 SignalR Hub 的 SendToConnection 方法，將資料傳送至另一使用者
+            hubConnection.invoke("SendToConnection", userId, msg)
+                .then(() => {
+                    console.log("Msg sent successfully!");
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        }
+
+        // 註冊 MessageHub 的事件
+        hubConnection.on("sendToAllConnections", function (msgs) {
+            console.log("To All Connections:", msgs);
+        });
+
+        hubConnection.on("StringDataTransfer", (response) => {
+            console.log("Received Msg:", response);
+        });
+        
+
+    </script>
+</head>
+<body>
+    SignalR TEST
+    <hr>
+    <label for="userIdInput">Please enter user ID：</label>
+    <input type="text" id="userIdInput">
+    <button onclick="onLoginClick()">Login</button>
+    <hr>
+    <label for="msgUserIdInput">User ID：</label>
+    <input type="text" id="msgUserIdInput">
+    <label for="msgInput">msg:</label>
+    <input type="text" id="msgInput">
+    <button onclick="onSendClick()">Send</button>
+
+</body>
+</html>

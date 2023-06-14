@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "Hash": "7BbUFXiOvMNTVMcqzRulJMxj6nAU06f5Ia8iJdJHiD8=",
+  "Source": "SignalR-Example",
+  "BasePath": "_content/SignalR-Example",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "SignalR-Example\\wwwroot",
+      "Source": "SignalR-Example",
+      "ContentRoot": "C:\\Users\\n000177264\\source\\repos\\SignalR-Example\\wwwroot\\",
+      "BasePath": "_content/SignalR-Example",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\n000177264\\source\\repos\\SignalR-Example\\wwwroot\\htmlpage.html",
+      "SourceId": "SignalR-Example",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\n000177264\\source\\repos\\SignalR-Example\\wwwroot\\",
+      "BasePath": "_content/SignalR-Example",
+      "RelativePath": "htmlpage.html",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\htmlpage.html"
+    }
+  ]
+}
